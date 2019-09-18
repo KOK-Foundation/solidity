@@ -33,6 +33,16 @@ void SSAValueTracker::operator()(Assignment const& _assignment)
 		m_values.erase(var.name);
 }
 
+set<YulString> SSAValueTracker::ssaVariables(Block const& _ast)
+{
+	SSAValueTracker t;
+	t(_ast);
+	set<YulString> ssaVars;
+	for (auto const& value: t.values())
+		ssaVars.insert(value.first);
+	return ssaVars;
+}
+
 void SSAValueTracker::operator()(FunctionDefinition const& _funDef)
 {
 	for (auto const& var: _funDef.returnVariables)
