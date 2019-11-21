@@ -35,6 +35,9 @@ struct MockedAccount
         {}
     };
 
+    /// The account nonce.
+    size_t nonce = 0;
+
     /// The account code.
     bytes code;
 
