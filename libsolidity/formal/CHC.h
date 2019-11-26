@@ -120,11 +120,10 @@ private:
 	/// @returns the current symbolic values of the current function's
 	/// input and output parameters.
 	std::vector<smt::Expression> currentFunctionVariables();
-	/// @returns the samve as currentFunctionVariables plus
+	/// @returns the same as currentFunctionVariables plus
 	/// local variables.
 	std::vector<smt::Expression> currentBlockVariables();
 
-	/// Sets the SSA indices of the variables in scope to 0.
 	/// @returns the predicate name for a given node.
 	std::string predicateName(ASTNode const* _node);
 	/// @returns a predicate application over the current scoped variables.
