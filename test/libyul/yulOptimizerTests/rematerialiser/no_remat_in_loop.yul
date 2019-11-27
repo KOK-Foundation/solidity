@@ -12,10 +12,6 @@
 //     let a := origin()
 //     let b := calldataload(0)
 //     let i := 0
-//     for { }
-//     lt(i, 10)
-//     {
-//         i := add(origin(), calldataload(0))
-//     }
+//     for { } lt(i, 10) { i := add(origin(), b) }
 //     { }
 // }

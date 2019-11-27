@@ -29,7 +29,7 @@ namespace yul
 /**
  * Optimisation stage that replaces variables by their most recently assigned expressions,
  * but only if the expression is movable and one of the following holds:
- *  - the variable is referenced exactly once
+ *  - the variable is referenced exactly once (and we are not inside a loop)
  *  - the value is extremely cheap ("cost" of zero like ``caller()``)
  *  - the variable is referenced at most 5 times and the value is rather cheap
  *    ("cost" of at most 1 like a constant up to 0xff)
@@ -68,9 +68,13 @@ protected:
 		std::set<YulString> _varsToAlwaysRematerialize = {}
 	);
 
+	using DataFlowAnalyzer::operator();
+	void operator()(ForLoop& _loop) override;
+
 	using ASTModifier::visit;
 	void visit(Expression& _e) override;
 
+	size_t m_loopDepth{0};
 	std::map<YulString, size_t> m_referenceCounts;
 	std::set<YulString> m_varsToAlwaysRematerialize;
 };
